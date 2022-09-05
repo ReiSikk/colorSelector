@@ -1,0 +1,31 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+#color_picker {
+  padding-top: 15vh;
+  padding-bottom: 15vh;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  background-color: antiquewhite;
+  box-shadow: 4px 6px 7px lightgray;
+  border: 2px solid black;
+}
+label {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: large;
+  font-weight: 600;
+}
+.color_container {
+  display: flex;
+  gap: 1rem;
+}
+.color_values {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-left: 1rem;
+}

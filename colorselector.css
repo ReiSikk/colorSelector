@@ -3,16 +3,14 @@
   padding: 0;
   box-sizing: border-box;
 }
-#color_picker {
+#picker_wrapper {
   padding-top: 15vh;
   padding-bottom: 15vh;
   display: flex;
   justify-content: center;
-  height: 100%;
-  width: 100%;
-  background-color: antiquewhite;
-  box-shadow: 4px 6px 7px lightgray;
-  border: 2px solid black;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
 }
 label {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
@@ -20,12 +18,22 @@ label {
   font-weight: 600;
 }
 .color_container {
+  width: 50vw;
+  height: auto;
+  background-color: lightcyan;
+  border: 2px solid darkslategrey;
+  border-radius: 20px;
+  box-shadow: 6px 9px 33px 4px black;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1em;
   gap: 1rem;
 }
 .color_values {
   display: flex;
   flex-direction: column;
+  gap: 0.5em;
   justify-content: flex-end;
-  padding-left: 1rem;
+  padding-right: 0.5em;
 }

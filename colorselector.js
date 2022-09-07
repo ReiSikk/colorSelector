@@ -103,6 +103,3 @@ function hexToRgb() {
   // return {r: r, g: g, b: b}
   return { r, g, b };
 }
-//store the returned object into a variable
-/* const rgbValueObject = hexToRgb(); */
-/* console.log(rgbValueObject); */

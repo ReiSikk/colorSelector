@@ -37,12 +37,13 @@ function getValue() {
     rgbColorValue = hexToRgb(hexColorValue);
     console.log(rgbColorValue);
     //HSL value
-
-    // display rgb and hsl values
+    hslColorValue = rgbToHSL(rgbColorValue.r, rgbColorValue.g, rgbColorValue.b);
+    // display values
     hexV.textContent = hexColorValue;
 
     rgbV.textContent = `rgb: ${rgbColorValue.r}, ${rgbColorValue.g},${rgbColorValue.b}`;
 
+    hslV.textContent = `hsl: ${hslColorValue.h}, ${hslColorValue.s}, ${hslColorValue.l}`;
     //set bpdy background color
     body.style.backgroundColor = hexColorValue;
   });
@@ -86,7 +87,8 @@ function rgbToHSL() {
   s *= 100;
   l *= 100;
 
-  console.log("hsl(%f,%f%,%f%)", h, s, l); // just for testing
+  /* console.log("hsl(%f,%f%,%f%)", h, s, l); // just for testing */
+  return { h: Math.floor(h), s: Math.floor(s), l: Math.floor(l) };
 }
 
 ///fucntion hex to rgb

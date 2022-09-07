@@ -1,5 +1,3 @@
-"use strict";
-
 ///////TODO:
 //1. rgb to hsl conversion function
 //2. rgb to hex conversion function
@@ -8,10 +6,48 @@
 // 5. display hsl values function
 // 6. display color as the background div color function
 
-let r, g, b, h, s, l;
+"use strict";
 
-let colorPickerValue = document.querySelector("#color").value;
-console.log(colorPickerValue);
+const hexV = document.querySelector(".hex");
+const rgbV = document.querySelector(".rgb");
+const hslV = document.querySelector(".hsl");
+const colorpicker = document.querySelector("#colorpicker");
+const body = document.querySelector("body");
+
+window.addEventListener("DOMContentLoaded", init);
+let r, g, b, h, s, l, hexColorValue, rgbColorValue, hslColorValue, hexString, color;
+
+//set up
+function init() {
+  hexV.textContent = "#ffffff";
+  rgbV.textContent = "rgb: 255, 255, 255";
+  hslV.textContent = "hsl: 0, 0, 100";
+  getValue();
+}
+
+//get hex color value and show it
+function getValue() {
+  let hexColorValue = "#ffffff";
+  let rgbColorValue = "rgb: 255, 255, 255";
+  colorpicker.addEventListener("input", (e) => {
+    let colorPickValue = e.target.value;
+    // HEX value
+    hexColorValue = `${colorPickValue}`;
+    //RGB value
+    rgbColorValue = hexToRgb(hexColorValue);
+    console.log(rgbColorValue);
+    //HSL value
+
+    // display rgb and hsl values
+    hexV.textContent = hexColorValue;
+
+    rgbV.textContent = `rgb: ${rgbColorValue.r}, ${rgbColorValue.g},${rgbColorValue.b}`;
+
+    //set bpdy background color
+    body.style.backgroundColor = hexColorValue;
+  });
+}
+
 // coverting RGB to HSL values
 
 rgbToHSL();
@@ -53,19 +89,18 @@ function rgbToHSL() {
   console.log("hsl(%f,%f%,%f%)", h, s, l); // just for testing
 }
 
-///////Function display color as div background//////////////
-let colorpicker = document.querySelector("#color");
-
-// setInterval method repeatedly calls a function witha fixed time delay between each call - in this case 0.1ms so it feels instant
-setInterval(() => {
+///fucntion hex to rgb
+function hexToRgb() {
+  console.log("hexToRgb called");
   let color = colorpicker.value;
-  document.querySelector("body").style.backgroundColor = color;
-}, 0.1);
-
-///fucntion rgb to hex
-
-/// function display HEX
-
-/// function display rgb
-
-/// function display hsl
+  hexString = color.substring(color.indexOf("#") + 1);
+  // makes strings into numbers
+  r = parseInt(hexString.substring(1, 3), 16);
+  g = parseInt(hexString.substring(3, 5), 16);
+  b = parseInt(hexString.substring(5, 7), 16);
+  // return {r: r, g: g, b: b}
+  return { r, g, b };
+}
+//store the returned object into a variable
+/* const rgbValueObject = hexToRgb(); */
+/* console.log(rgbValueObject); */

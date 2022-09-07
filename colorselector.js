@@ -15,7 +15,7 @@ const colorpicker = document.querySelector("#colorpicker");
 const body = document.querySelector("body");
 
 window.addEventListener("DOMContentLoaded", init);
-let r, g, b, h, s, l, hexColorValue, rgbColorValue, hslColorValue, hexString, color;
+let r, g, b, h, s, l, hexColorValue, rgbColorValue, hslColorValue, hexString, color, colorPickValue;
 
 //set up
 function init() {
@@ -43,14 +43,28 @@ function getValue() {
 
     rgbV.textContent = `rgb: ${rgbColorValue.r}, ${rgbColorValue.g},${rgbColorValue.b}`;
 
-    hslV.textContent = `hsl: ${hslColorValue.h}, ${hslColorValue.s}, ${hslColorValue.l}`;
+    displayHsl();
+    changeBackground();
     //set bpdy background color
-    body.style.backgroundColor = hexColorValue;
+    /*    body.style.backgroundColor = hexColorValue; */
   });
 }
 
-// coverting RGB to HSL values
+///DISPLAY VALUES
+function displayHsl() {
+  hslV.textContent = `hsl: ${hslColorValue.h}, ${hslColorValue.s}, ${hslColorValue.l}`;
+}
 
+function changeBackground() {
+  colorpicker.addEventListener("input", (e) => {
+    let colorPickValue = e.target.value;
+    hexColorValue = `${colorPickValue}`;
+  });
+  console.log("change background called");
+  body.style.backgroundColor = hexColorValue;
+}
+
+// coverting RGB to HSL values
 rgbToHSL();
 function rgbToHSL() {
   r /= 255;
@@ -93,7 +107,6 @@ function rgbToHSL() {
 
 ///fucntion hex to rgb
 function hexToRgb() {
-  console.log("hexToRgb called");
   let color = colorpicker.value;
   hexString = color.substring(color.indexOf("#") + 1);
   // makes strings into numbers
@@ -103,3 +116,12 @@ function hexToRgb() {
   // return {r: r, g: g, b: b}
   return { r, g, b };
 }
+
+/* function rgbToHex(rgbObject) {
+  let r, g, b;
+  r = rgbObject.r;
+  g = rgbObject.g;
+  b = rgbObject.b;
+  rgbToHSL(rgbObject.r, rgbObject.g, rgbObject.b);
+  return `#${r}${g}${b}`;
+} */

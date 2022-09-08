@@ -11,24 +11,25 @@
 const hexV = document.querySelector(".hex");
 const rgbV = document.querySelector(".rgb");
 const hslV = document.querySelector(".hsl");
+const cssV = document.querySelector(".css");
 const colorpicker = document.querySelector("#colorpicker");
 const body = document.querySelector("body");
 
 window.addEventListener("DOMContentLoaded", init);
-let r, g, b, h, s, l, hexColorValue, rgbColorValue, hslColorValue, hexString, color, colorPickValue;
+let r, g, b, h, s, l, hexColorValue, rgbColorValue, hslColorValue, hexString, color, colorPickValue, cssColorValue;
 
 //set up
 function init() {
-  hexV.textContent = "#ffffff";
+  hexV.textContent = colorpicker.value;
   rgbV.textContent = "rgb: 255, 255, 255";
   hslV.textContent = "hsl: 0, 0, 100";
+  cssV.textContent = "rgb(0, 0, 0,)";
   getValue();
 }
 
-//get hex color value and show it
+//////**************MODAL*****************//////// */
 function getValue() {
-  let hexColorValue = "#ffffff";
-  let rgbColorValue = "rgb: 255, 255, 255";
+  let hexColorValue, rgbColorValue;
   colorpicker.addEventListener("input", (e) => {
     let colorPickValue = e.target.value;
     // HEX value
@@ -38,30 +39,34 @@ function getValue() {
     console.log(rgbColorValue);
     //HSL value
     hslColorValue = rgbToHSL(rgbColorValue.r, rgbColorValue.g, rgbColorValue.b);
-    // display values
-    hexV.textContent = hexColorValue;
-
-    rgbV.textContent = `rgb: ${rgbColorValue.r}, ${rgbColorValue.g},${rgbColorValue.b}`;
-
-    displayHsl();
-    changeBackground();
-    //set bpdy background color
-    /*    body.style.backgroundColor = hexColorValue; */
+    //CSS value
+    cssColorValue = rgbToCss(rgbColorValue);
+    ///call the display func
+    displayColors(hexColorValue, rgbColorValue, hslColorValue, cssColorValue);
   });
 }
 
-///DISPLAY VALUES
-function displayHsl() {
-  hslV.textContent = `hsl: ${hslColorValue.h}, ${hslColorValue.s}, ${hslColorValue.l}`;
+///***********VIEW**************////////// */
+function displayColors(hex, rgb, hsl, css) {
+  displayHex(hex);
+  displayHsl(hsl);
+  displayRgb(rgb);
+  displayCss(css);
+  //set the body background color
+  body.style.backgroundColor = hex;
 }
-
-function changeBackground() {
-  colorpicker.addEventListener("input", (e) => {
-    let colorPickValue = e.target.value;
-    hexColorValue = `${colorPickValue}`;
-  });
-  console.log("change background called");
-  body.style.backgroundColor = hexColorValue;
+///********************CONTROLLER////************* */
+function displayHex(hex) {
+  hexV.textContent = hex;
+}
+function displayRgb(rgb) {
+  rgbV.textContent = `rgb: ${rgb.r},${rgb.g},${rgb.b}`;
+}
+function displayHsl(hsl) {
+  hslV.textContent = `hsl: ${hsl.h}, ${hsl.s}, ${hsl.l}`;
+}
+function displayCss(css) {
+  cssV.textContent = `css: rgb(${css.r},${css.g},${css.b})`;
 }
 
 // coverting RGB to HSL values
@@ -117,6 +122,12 @@ function hexToRgb() {
   return { r, g, b };
 }
 
+function rgbToCss(rgb) {
+  r = rgb.r;
+  g = rgb.g;
+  b = rgb.b;
+  return { r, g, b };
+}
 /* function rgbToHex(rgbObject) {
   let r, g, b;
   r = rgbObject.r;
